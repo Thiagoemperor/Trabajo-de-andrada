@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <title>Veggie</title>
+</head>
+<body>
+
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <p class="navbar-brand" href="#">
+            <img src="/imagenes/coolpalta.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <h1>Veggie</h1>
+        </p>
+    </div>
+</nav>
+
+<h1>Tipos de viandas</h1>
+
+<input type="checkbox" id="dieta">
+<label for="dieta">dieta</label>
+<input type="checkbox" id="normal">
+<label for="normal">normal</label>
+<input type="checkbox" id="pro">
+<label for="pro">pro</label>
+
+<form class="form">
+    <span class="input-span">
+        <label for="email" class="label">Email</label>
+        <input type="email" name="email" id="email">
+    </span>
+    <span class="input-span">
+        <label for="cantidadViandas" class="label">Cantidad de viandas a llevar:</label>
+        <select id="cantidadViandas" name="cantidadViandas">
+            
+            
+        </select>
+    </span>
+    <span class="input-span">
+        <label for="viandasMenu" class="label">Cantidad de viandas por menú:</label>
+        
+        <input type="number" id="viandasMenu" name="viandasMenu" min="0" max="4">
+    </span>
+    <button class="submit" type="button" onclick="calcularPrecioTotal()">Calcular Precio Total</button>
+    <p id="precioTotal"></p>
+</form>
+
+
+<h1>Selección de Comidas Cárnicas</h1>
+
+<div class="card">
+    <span class="card-label">fideos don salsa pesto</span>
+    <select class="card-select" name="cantidad-carnicas" id="cantidad-carnicas">
+        
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+</div>
+
+<div class="card">
+  <span class="card-label">fideos don salsa pesto</span>
+  <select class="card-select" name="cantidad-carnicas" id="cantidad-carnicas">
+
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+  </select>
+</div>
+
+<div class="card">
+  <span class="card-label">fideos don salsa pesto</span>
+  <select class="card-select" name="cantidad-carnicas" id="cantidad-carnicas">
+    
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+  </select>
+</div>
+
+<h1>Veggies</h1>
+
+<div class="card2">
+  <span class="card-label">ensalada</span>
+  <select class="card-select" name="cantidad-carnicas" id="cantidad-carnicas">
+      
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+  </select>
+</div>
+
+<div class="card">
+  <span class="card-label">ensalada</span>
+  <select class="card-select" name="cantidad-carnicas" id="cantidad-carnicas">
+      
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+  </select>
+</div>
+
+<div class="card">
+  <span class="card-label">ensalada</span>
+  <select class="card-select" name="cantidad-carnicas" id="cantidad-carnicas">
+      
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+  </select>
+</div>
+
+<script>
+    function cargarCantidadDeViandas() {
+        var select = document.getElementById("cantidadViandas");
+
+        for (var i = 0; i <= 56; i += 2) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            select.appendChild(option);
+        }
+    }
+
+    cargarCantidadDeViandas();
+
+    function cargarCantidadDeViandasMenu() {
+        var select = document.getElementById("viandasMenu");
+        var maxViandas = 4;
+
+        for (var i = 0; i <= maxViandas; i++) {
+            var option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            select.appendChild(option);
+        }
+    }
+
+    cargarCantidadDeViandasMenu();
+
+    
+    
+    function calcularPrecioTotal() {
+  var cantidadViandas = parseInt(document.getElementById("cantidadViandas").value);
+  var cantidadViandasMenu = parseInt(document.getElementById("viandasMenu").value);
+  var precioTotal = 0;
+  var precioUnitarioDieta = 450;
+  var precioUnitarioNormal = 630;
+  var precioUnitarioPro = 800;
+  var descuentoPorCada14 = 0.02;
+
+  var precioTotalDieta = 0;
+  var precioTotalNormal = 0;
+  var precioTotalPro = 0;
+
+  if (document.getElementById("dieta").checked) {
+    precioTotalDieta = cantidadViandas * precioUnitarioDieta;
+  }
+  
+  if (document.getElementById("normal").checked) {
+    precioTotalNormal = cantidadViandasMenu * precioUnitarioNormal;
+    if (cantidadViandasMenu >= 14) {
+      var descuento = Math.floor(cantidadViandasMenu / 14) * precioUnitarioNormal * descuentoPorCada14;
+      precioTotalNormal -= descuento;
+    }
+  }
+  
+  if (document.getElementById("pro").checked) {
+    precioTotalPro = cantidadViandasMenu * precioUnitarioPro;
+    if (cantidadViandasMenu >= 14) {
+      var descuento = Math.floor(cantidadViandasMenu / 14) * precioUnitarioPro * descuentoPorCada14;
+      precioTotalPro -= descuento;
+    }
+  }
+
+  precioTotal = precioTotalDieta + precioTotalNormal + precioTotalPro;
+
+  document.getElementById("precioTotal").innerText = "$" + precioTotal;
+}
+
+
+    function verificarMitadViandas() {
+        var cantidadViandas = parseInt(document.getElementById("cantidadViandas").value);
+        var cantidadViandasMenu = parseInt(document.getElementById("viandasMenu").value);
+        var mitadViandas = cantidadViandas / 2;
+
+        if (cantidadViandasMenu === mitadViandas) {
+            console.log("La mitad de las viandas son cárnico y la otra mitad son vegetarianas.");
+        } else {
+            console.log("La cantidad de viandas seleccionadas no cumple con el requisito de la mitad cárnico y la mitad vegetariano.");
+        }
+    }
+
+    verificarMitadViandas();
+
+
+</script>
+
+</body>
+</html>
